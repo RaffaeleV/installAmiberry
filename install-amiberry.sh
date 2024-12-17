@@ -53,7 +53,6 @@ unzip -q amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip -d ~/a
 chmod +x ~/amiberry/amiberry > /dev/null 2>&1 || error_exit $LINENO
 rm amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip > /dev/null 2>&1 || error_exit $LINENO
 
-
 # Download KSs
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/ks.zip > /dev/null 2>&1 || error_exit $LINENO
 unzip -q -o ks.zip -d ~/amiberry/kickstarts > /dev/null 2>&1 || error_exit $LINENO
