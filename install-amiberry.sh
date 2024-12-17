@@ -62,7 +62,7 @@ wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/default
 sudo mv default.uae ~/amiberry/conf/default.uae > /dev/null 2>&1 || error_exit $LINENO
 
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev.34.34.Extras.adf > /dev/null 2>&1 || error_exit $LINENO
-wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev%2034.34.adf > /dev/null 2>&1 || error_exit $LINENO
+wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev.34.34.adf > /dev/null 2>&1 || error_exit $LINENO
 sudo mv Workbench.v1.3.3.rev.34.34.Extras.adf ~/amiberry/floppies/ > /dev/null 2>&1 || error_exit $LINENO
 sudo mv Workbench.v1.3.3.rev.34.34.adf ~/amiberry/floppies/ > /dev/null 2>&1 || error_exit $LINENO
 
