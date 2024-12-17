@@ -19,7 +19,7 @@ trap 'error_exit $LINENO' ERR
 echo "========================================================"
 echo "Amiberry installation!"
 echo "To copy kickstarts and software, access the 'amiberry' folder"
-echo "from your Windows machine using this address: \\\\$(hostname -I | cut -d' ' -f1)\\amiberry or \\\\$local_ip\\amiberry"
+echo "from your Windows machine using this address: \\\\$(hostname -I | cut -d' ' -f1)\\amiberry"
 echo "Login credentials: Username: ${USER_N} | Password: ${USER_PWD}"
 echo "========================================================"
 read -p "Press any key to start..." -n1 -s
