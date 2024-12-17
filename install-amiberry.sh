@@ -53,15 +53,19 @@ unzip -q amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip -d ~/a
 chmod +x ~/amiberry/amiberry > /dev/null 2>&1 || error_exit $LINENO
 rm amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip > /dev/null 2>&1 || error_exit $LINENO
 
+
 # Download KSs
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/ks.zip > /dev/null 2>&1 || error_exit $LINENO
 unzip -q -o ks.zip -d ~/amiberry/kickstarts > /dev/null 2>&1 || error_exit $LINENO
 rm ks.zip > /dev/null 2>&1 || error_exit $LINENO
+wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/default.uae > /dev/null 2>&1 || error_exit $LINENO
+sudo mv default.uae ~/amiberry/conf/default.uae > /dev/null 2>&1 || error_exit $LINENO
+rm default.uae > /dev/null 2>&1 || error_exit $LINENO
 
 # Step 4: Remove boot logo, bootscreen and initial messages
 echo "Removing boot logo and boot messages..."
 CMDLINE_FILE="/boot/firmware/cmdline.txt"
-sudo sed -i 's/$/ logo.nologo quiet console=tty3 vt.global_cursor_default=0/' "$CMDLINE_FILE" > /dev/null 2>&1 || error_exit $LINENO
+sudo sed -i 's/$/ logo.nologo quiet/' "$CMDLINE_FILE" > /dev/null 2>&1 || error_exit $LINENO
 sudo sed -i '/^# disable_splash=1/ s/^#//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
 sudo sed -i '/^disable_splash=1/ s/.*//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
 echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
