@@ -77,7 +77,6 @@ echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1
 # sudo mv splash.png /usr/share/plymouth/themes/pix/splash.png > /dev/null 2>&1 || error_exit $LINENO
 # sudo plymouth-set-default-theme -R pix > /dev/null 2>&1 || error_exit $LINENO
 
-
 # Step 5: Enable autologin for pi user
 echo "Enabling autologin for user ${USER_N}..."
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d || error_exit $LINENO
