@@ -53,18 +53,22 @@ unzip -q amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip -d ~/a
 chmod +x ~/amiberry/amiberry > /dev/null 2>&1 || error_exit $LINENO
 rm amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip > /dev/null 2>&1 || error_exit $LINENO
 
+# Download KSs
+wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/ks.zip > /dev/null 2>&1 || error_exit $LINENO
+unzip -q -d ~/amiberry> /dev/null 2>&1 || error_exit $LINENO
+
 # Step 4: Remove boot logo, bootscreen and initial messages
-echo "Removing boot logo, boot messages and customize splash screen..."
+echo "Removing boot logo and boot messages..."
 CMDLINE_FILE="/boot/firmware/cmdline.txt"
-sudo sed -i 's/$/ logo.nologo quiet console=tty3/' "$CMDLINE_FILE" > /dev/null 2>&1 || error_exit $LINENO
-# sudo sed -i '/^# disable_splash=1/ s/^#//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
-# sudo sed -i '/^disable_splash=1/ s/.*//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
-# echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
+sudo sed -i 's/$/ logo.nologo quiet console=tty3 vt.global_cursor_default=0/' "$CMDLINE_FILE" > /dev/null 2>&1 || error_exit $LINENO
+sudo sed -i '/^# disable_splash=1/ s/^#//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
+sudo sed -i '/^disable_splash=1/ s/.*//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
+echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
 
-curl -O https://raw.githubusercontent.com/RaffaeleV/installAmiberry/refs/heads/main/splash.png > /dev/null 2>&1 || error_exit $LINENO
-
-sudo mv splash.png /usr/share/plymouth/themes/pix/splash.png > /dev/null 2>&1 || error_exit $LINENO
-sudo plymouth-set-default-theme -R pix > /dev/null 2>&1 || error_exit $LINENO
+# Insert custom splash-screen (Requires Plymouth)
+# curl -O https://raw.githubusercontent.com/RaffaeleV/installAmiberry/refs/heads/main/splash.png > /dev/null 2>&1 || error_exit $LINENO
+# sudo mv splash.png /usr/share/plymouth/themes/pix/splash.png > /dev/null 2>&1 || error_exit $LINENO
+# sudo plymouth-set-default-theme -R pix > /dev/null 2>&1 || error_exit $LINENO
 
 
 # Step 5: Enable autologin for pi user
