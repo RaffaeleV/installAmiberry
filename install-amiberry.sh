@@ -57,12 +57,18 @@ rm amiberry-v${AMI_VERS}-debian-bookworm-aarch64-rpi${RPI_VERS}.zip > /dev/null 
 # Download KSs
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/ks.zip > /dev/null 2>&1 || error_exit $LINENO
 unzip -q -o ks.zip -d ~/amiberry/kickstarts > /dev/null 2>&1 || error_exit $LINENO
-rm ks.zip > /dev/null 2>&1 || error_exit $LINENO
+
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/default.uae > /dev/null 2>&1 || error_exit $LINENO
 sudo mv default.uae ~/amiberry/conf/default.uae > /dev/null 2>&1 || error_exit $LINENO
-rm default.uae > /dev/null 2>&1 || error_exit $LINENO
-wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev%2034.34.Extras.adf > /dev/null 2>&1 || error_exit $LINENO
+
+wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev.34.34.Extras.adf > /dev/null 2>&1 || error_exit $LINENO
 wget -q https://github.com/RaffaeleV/installAmiberry/raw/refs/heads/main/Workbench.v1.3.3.rev%2034.34.adf > /dev/null 2>&1 || error_exit $LINENO
+sudo mv Workbench.v1.3.3.rev.34.34.Extras.adf ~/amiberry/floppies/ > /dev/null 2>&1 || error_exit $LINENO
+sudo mv Workbench.v1.3.3.rev.34.34.adf ~/amiberry/floppies/ > /dev/null 2>&1 || error_exit $LINENO
+
+rm ks.zip > /dev/null 2>&1 || error_exit $LINENO
+rm default.uae > /dev/null 2>&1 || error_exit $LINENO
+rm *.adf > /dev/null 2>&1 || error_exit $LINENO
 
 # Step 4: Remove boot logo, bootscreen and initial messages
 echo "Removing boot logo and boot messages..."
