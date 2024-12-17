@@ -24,6 +24,7 @@ echo "Login credentials: Username: ${USER_N} | Password: ${USER_PWD}"
 echo "========================================================"
 read -p "Press any key to start..." -n1 -s
 
+echo
 
 # Step 1: Update system
 echo "Updating system..."
