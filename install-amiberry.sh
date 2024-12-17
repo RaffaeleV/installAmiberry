@@ -71,6 +71,7 @@ sudo sed -i 's/$/ logo.nologo quiet/' "$CMDLINE_FILE" > /dev/null 2>&1 || error_
 sudo sed -i '/^# disable_splash=1/ s/^#//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
 sudo sed -i '/^disable_splash=1/ s/.*//' /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
 echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1 || error_exit $LINENO
+sudo rm /etc/motd > /dev/null 2>&1 || error_exit $LINENO
 
 # Insert custom splash-screen (Requires Plymouth)
 # curl -O https://raw.githubusercontent.com/RaffaeleV/installAmiberry/refs/heads/main/splash.png > /dev/null 2>&1 || error_exit $LINENO
