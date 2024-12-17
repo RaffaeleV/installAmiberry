@@ -77,18 +77,7 @@ echo "disable_splash=1" | sudo tee -a /boot/firmware/config.txt > /dev/null 2>&1
 # sudo mv splash.png /usr/share/plymouth/themes/pix/splash.png > /dev/null 2>&1 || error_exit $LINENO
 # sudo plymouth-set-default-theme -R pix > /dev/null 2>&1 || error_exit $LINENO
 
-# Step 5: Enable autologin for pi user
-echo "Enabling autologin for user ${USER_N}..."
-sudo mkdir -p /etc/systemd/system/getty@tty1.service.d || error_exit $LINENO
-cat << EOF | sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null 2>&1
-[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin ${USER_N} --noclear %I \$TERM
-EOF
-sudo systemctl daemon-reload > /dev/null 2>&1 || error_exit $LINENO
-sudo systemctl restart getty@tty1 > /dev/null 2>&1 || error_exit $LINENO
-
-# Step 6: Configure SAMBA for Amiberry directory access
+# Step 5: Configure SAMBA for Amiberry directory access
 echo "Configuring SAMBA for Amiberry directory..."
 cat << 'EOF' | sudo tee /etc/samba/smb.conf > /dev/null 2>&1 || error_exit $LINENO
 [global]
@@ -110,7 +99,7 @@ ${USER_PWD}
 ${USER_PWD}
 EOF
 
-# Step 7: Auto-start Amiberry on boot
+# Step 6: Auto-start Amiberry on boot
 echo "Configuring Amiberry to start on boot..."
 cat << 'EOF' > ~/start_amiberry.sh
 #!/bin/bash
@@ -118,6 +107,17 @@ cd ~/amiberry && ./amiberry
 EOF
 chmod +x ~/start_amiberry.sh > /dev/null 2>&1 || error_exit $LINENO
 echo "~/start_amiberry.sh" >> ~/.bashrc || error_exit $LINENO
+
+# Step 7: Enable autologin for pi user
+echo "Enabling autologin for user ${USER_N}..."
+sudo mkdir -p /etc/systemd/system/getty@tty1.service.d || error_exit $LINENO
+cat << EOF | sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf > /dev/null 2>&1
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin ${USER_N} --noclear %I \$TERM
+EOF
+sudo systemctl daemon-reload > /dev/null 2>&1 || error_exit $LINENO
+sudo systemctl restart getty@tty1 > /dev/null 2>&1 || error_exit $LINENO
 
 # Step 8: Final Message Before Reboot
 echo "========================================================"
