@@ -1,7 +1,7 @@
 config_description=UAE default configuration
 config_hardware=true
 config_host=true
-config_version=7.1.0
+config_version=5.8.1
 config_hardware_path=
 config_host_path=
 config_all_path=
@@ -15,7 +15,7 @@ amiberry.soundcardname=vc4-hdmi-0, MAI PCM i2s-hifi-0
 ; common
 use_gui=yes
 use_debugger=false
-kickstart_rom_file=/home/pi/Amiberry/roms/Kickstart v1.3 rev 34.5 (1987)(Commodore)(A500-A1000-A2000-CDTV).rom
+kickstart_rom_file=/home/pi/Amiberry-Lite/roms/Kickstart v1.3 rev 34.5 (1987)(Commodore)(A500-A1000-A2000-CDTV).rom
 kickstart_rom_file_id=C4F0F55F,KS ROM v1.3 (A500,A1000,A2000)
 kickstart_ext_rom_file=
 flash_file=
